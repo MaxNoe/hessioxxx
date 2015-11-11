@@ -1,3 +1,6 @@
+set(CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/lib")
+set(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
+
 set( HESSIO_SOURCES
                     atmprof.c
                     current.c
@@ -38,6 +41,7 @@ add_library( hessio++ SHARED
              EventIO.cc 
              ${PROJECT_SOURCE_DIR}/include/EventIO.hh
              ${HESSIO_SOURCES} ${HESSIO_INCLUDES} )
+
 
 
 # C Executables
@@ -87,3 +91,7 @@ target_link_libraries( statio hessio++ )
 add_executable( filterio filterio.cc )
 target_link_libraries( filterio hessio++ )
 
+install (TARGETS hessio hessio++ testio read_hess read_hess_nr split_hessio check_trgmask gen_trgmask extract_hess merge_simtel list_histograms add_histograms fcat  testio++ statio filterio
+	RUNTIME DESTINATION bin
+	LIBRARY DESTINATION lib
+)
